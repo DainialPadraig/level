@@ -30,10 +30,17 @@ input.onButtonPressed(Button.B, function () {
         basic.showString("x" + multiplier)
     }
 })
+let display_y = 0
+let display_x = 0
+let y_value = 0
 let x_value = 0
 let multiplier = 0
 multiplier = 1
 basic.forever(function () {
-    x_value = Math.round((input.rotation(Rotation.Roll) + 90) / multiplier)
-    basic.showNumber(x_value)
+    x_value = Math.round(input.rotation(Rotation.Roll) / multiplier)
+    y_value = Math.round(input.rotation(Rotation.Pitch) / multiplier)
+    display_x = Math.map(x_value, 0 - 2 * multiplier, 2 * multiplier, 0, 4)
+    display_y = Math.map(y_value, 0 - 2 * multiplier, 2 * multiplier, 0, 4)
+    basic.clearScreen()
+    led.toggle(display_x, display_y)
 })
